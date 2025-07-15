@@ -1,0 +1,76 @@
+CREATE DATABASE altamayouz_school;
+
+-- استخدام قاعدة البيانات
+USE altamayouz_school;
+-- جدول الطلاب
+CREATE TABLE students (
+    student_id INT PRIMARY KEY,
+    name VARCHAR(100),
+    birth_date DATE,
+    gender CHAR(1),  -- F أو M
+    enrollment_date DATE,
+    email VARCHAR(100),
+    level INT,  -- من 1 إلى 6
+    track VARCHAR(20),  -- علمي أو انساني
+    gpa DECIMAL(5,2)  -- المعدل التراكمي من 100
+);
+CREATE TABLE teachers (
+    teacher_id INT PRIMARY KEY,
+    name VARCHAR(100),
+    birth_date DATE,
+    gender CHAR(1),
+    email VARCHAR(100),
+    office_number VARCHAR(10)
+);
+
+-- جدول المواد
+CREATE TABLE subjects (
+    subject_id INT PRIMARY KEY,
+    subject_name VARCHAR(100)
+);
+SHOW TABLES;
+INSERT INTO students VALUES 
+(1, 'أحمد محمد', '2007-05-10', 'M', '2022-09-01', 'ahmed@example.com', 3, 'علمي', 85.50),
+(2, 'سارة علي', '2006-12-22', 'F', '2021-09-01', 'sara@example.com', 4, 'انساني', 90.20),
+(3, 'نواف سعود', '2007-03-15', 'M', '2022-09-01', 'nawaf@example.com', 3, 'علمي', 88.70),
+(4, 'ليان خالد', '2005-11-08', 'F', '2020-09-01', 'layan@example.com', 5, 'انساني', 91.40),
+(5, 'تركي عبدالعزيز', '2006-07-18', 'M', '2021-09-01', 'turki@example.com', 4, 'علمي', 83.30);
+-- كرر إلى أن تصل 30 طالب بنفس الشكل
+INSERT INTO teachers VALUES
+(1, 'أ. خالد العتيبي', '1980-02-15', 'M', 'khaled@example.com', 'A101'),
+(2, 'أ. نورة الحربي', '1985-07-09', 'F', 'noura@example.com', 'B202'),
+(3, 'أ. عبدالله الغامدي', '1978-11-25', 'M', 'abdullah@example.com', 'C303'),
+(4, 'أ. ريم السبيعي', '1990-03-12', 'F', 'reem@example.com', 'D404'),
+(5, 'أ. ماجد الشهري', '1982-10-30', 'M', 'majed@example.com', 'E505'),
+(6, 'أ. سمية الدوسري', '1988-05-17', 'F', 'sumaya@example.com', 'F606'),
+(7, 'أ. فهد الزهراني', '1975-08-23', 'M', 'fahad@example.com', 'G707'),
+(8, 'أ. عبير المطيري', '1983-09-01', 'F', 'abeer@example.com', 'H808'),
+(9, 'أ. راشد الشمري', '1981-06-19', 'M', 'rashid@example.com', 'I909'),
+(10, 'أ. عائشة القحطاني', '1986-01-11', 'F', 'aisha@example.com', 'J010');
+INSERT INTO subjects VALUES
+(1, 'الرياضيات'),
+(2, 'الفيزياء'),
+(3, 'الكيمياء'),
+(4, 'الأحياء'),
+(5, 'التاريخ'),
+(6, 'اللغة العربية');
+-- عرض بيانات الطلاب
+SELECT * FROM students;
+
+-- عرض بيانات المعلمين
+SELECT * FROM teachers;
+SELECT * FROM subjects;
+SELECT * FROM students
+ORDER BY name ASC;
+-- استخدام alias لإعطاء اسم بديل
+SELECT name AS 'Student_Name', gpa, level FROM students;
+UPDATE students
+SET email = 'ahmed.new@example.com'
+WHERE student_id = 1;
+UPDATE teachers
+SET office_number = 'A999'
+WHERE teacher_id = 1;
+ALTER TABLE students
+ADD phone_number VARCHAR(20);
+-- تغيير اسم جدول المواد إلى courses
+RENAME TABLE subjects TO courses;
